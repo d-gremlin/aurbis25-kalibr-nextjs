@@ -14,6 +14,18 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@media screen and (min-width:850px) {
+  #mobile-header {
+      display: none;
+  }
+}
+@media screen and (max-width:850px) {
+  #pc-header{
+      display:none;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

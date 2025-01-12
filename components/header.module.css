@@ -1,0 +1,10 @@
+@media screen and (max-width:850px) {
+  #mobile-header {
+      display: none;
+  }
+}
+@media (min-width:850px) {
+  #pc-header{
+      display:none;
+  }
+}
