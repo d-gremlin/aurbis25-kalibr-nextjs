@@ -63,7 +63,11 @@ export default function Header() {
           <Link href={"/contacts"} className="text-center  border-t-2 border-grey-500  p-2 no-underline">Контакты</Link>
           <Link href={"/partnership"} className="text-center border-t-2 border-grey-500  p-2 no-underline">Сотрудничество</Link>
           <Link href={"/about"} className="text-center border-t-2 border-grey-500  p-2 no-underline">О компании</Link>
-          <Link href={"/services"} className="text-center border-t-2 border-grey-500   p-2  no-underline">Услуги</Link>
+          <Link href={
+            {
+              pathname: "/services",
+              query: { slug: "services" },
+            }} className="text-center border-t-2 border-grey-500   p-2  no-underline">Услуги</Link>
           </div>
         </div> : null}
 
@@ -116,7 +120,11 @@ export default function Header() {
           <Link href={"/contacts"} className="text-center no-underline">Контакты</Link>
           <Link href={"/partnership"}   className="text-center no-underline">Сотрудничество</Link>
           <Link href={"/about"} className="text-center no-underline">О компании</Link>
-          <Link href={"/services"}  className="text-center no-underline">Услуги</Link>
+          <Link href={
+            {
+              pathname: "/services",
+              query: { slug: "services" },
+            }}  className="text-center no-underline">Услуги</Link>
           </div>
         </div>
 

@@ -1,4 +1,6 @@
+
 import Header from "@/components/header"
+import Carousel from "@/components/carousel"
 import Image from "next/image"
 // import background from  "./background.jpg"
 async function getPageData() {
@@ -19,8 +21,10 @@ export default async function Home() {
   const pageData = await getPageData()
   return (
     <div>
-      <Header/>
+      <Header />
       <main className="flex  py-16 flex-col gap-8 ">
+      <Carousel />
+      
         <h1 className="self-center" >{pageData.data.Heading.Caption}</h1>
         <aside id="gallery" className="grid grid-cols-autofit self-center justify-center w-full lg:xl:px-[5%]  xl:2xl:px-[10%] 2xl:max-[6000px]:px-[15%]" data-featherlight-gallery
           data-featherlight-filter="a">
