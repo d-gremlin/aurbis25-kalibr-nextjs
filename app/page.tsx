@@ -30,28 +30,17 @@ async function getPageData(url: string) {
 
   return payload
 }
+
+
 async function PartnershipPageData(filterKey: string, filterValue: string | number) {
   const res = await fetch(`http://localhost:1337/api/pages?filters[${filterKey}][$contains]=${filterValue}`, { cache: 'no-store' })
   const partnershipPageData = await res.json()
 
   return partnershipPageData
 }
-export default async function Home() {
-  const url = `http://localhost:1337/api/partnership-section?populate[0]=Cards&populate[1]=Heading&populate[2]=Cards.Heading&populate[3]=Cards.Actions`
-  const payload: IPayload = await getPageData(url)
-  console.log(payload.data)
-  // const payload: IPayload = {
-  //   data: [],
-  //   valid: { error: null, isLoading: true }
-  // }
-  // const pageData = await getPageData()
-  return (
-    <div>
-      <Header valid={isGoodProps(payload.valid)}/>
-      <main className="flex justify-center justify-items-center items-center  py-16 flex-col gap-8 ">
-        {isGoodProps(payload.valid) ?
-          <Categories />
-          : <div className="grid grid-cols-4 grid-cols-autofit justify-self-center justify-center  justify-content-center gap-4 px-4 w-full animate-pulse">
+
+const CategoriesSkeleton = () => (
+  <div className="grid grid-cols-4 grid-cols-autofit justify-self-center justify-center  justify-content-center gap-4 px-4 w-full animate-pulse">
             <div className="relative  col-span-2 row-span-2">
               <div className="absolute flex  bottom-0 right-0 bg-black/15 w-full w-full h-full  z-10">
                 <span className="self-start h-8 bg-gray-300 rounded-full w-[50%] m-20 "></span>
@@ -78,7 +67,26 @@ export default async function Home() {
               <svg className="flex w-full h-full stroke-gray-400 justify-center center self-center  bg-gray-300" fill="none"></svg>
             </div>
 
-          </div>}
+  </div>
+)
+
+export default async function Home() {
+  const url = `http://localhost:1337/api/partnership-section?populate[0]=Cards&populate[1]=Heading&populate[2]=Cards.Heading&populate[3]=Cards.Actions`
+  const payload: IPayload = await getPageData(url)
+  console.log(payload.data)
+  // const payload: IPayload = {
+  //   data: [],
+  //   valid: { error: null, isLoading: true }
+  // }
+  // const pageData = await getPageData()
+  return (
+    <div>
+      <Header valid={isGoodProps(payload.valid)}/>
+      
+      <main className="flex justify-center justify-items-center items-center  py-16 flex-col gap-8 ">
+        {isGoodProps(payload.valid) ?
+          <Categories />
+          : <CategoriesSkeleton /> }
 
         {isGoodProps(payload.valid) ?
           <div className="flex flex-col  items-center justify-center text-center gap-4 ">
@@ -127,11 +135,13 @@ export default async function Home() {
             {/* <span className="h-8 bg-gray-300 rounded-full w-56 font-medium z-20"></span> */}
             <span className="  m-2 h-8 bg-gray-300 rounded-full w-52 font-medium z-20"></span>
           </div>}
+
         {isGoodProps(payload.valid) ?
           <ProductsCarousel />
           :
           <div className="relative  h-80  w-full bg-gray-300 animate-pulse" > </div>
         }
+
         {isGoodProps(payload.valid) ?
           <Carousel />
           :
@@ -304,6 +314,9 @@ export default async function Home() {
             </div>
           </div>
         }
+        {/* 
+          =============================================================================
+        */}
         {isGoodProps(payload.valid) ?
           <div className="flex border-top justify-content-center " >
             <div className="w-screen backdrop-blur-sm bg-black/30 absolute z-10 h-48">
@@ -360,6 +373,7 @@ export default async function Home() {
           </div>
         }
       </main>
+
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
