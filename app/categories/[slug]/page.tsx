@@ -8,11 +8,14 @@ type Props = {
   }
 }
 
-export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
-  const res = await fetch(`http://localhost:1337/api/categories?filters[Slug][$contains]=${(await params).slug}`, { cache: 'no-store' })
+export const generateMetadata = async ({params}:Props): Promise<Metadata>=>{
+  const res = await fetch(`http://localhost:1337/api/categories?filters[Slug][$contains]=${
+    (await params).slug
+  }`, { cache: 'no-store' })
+  
   const category = await res.json()
   return {
-    title: category.data[0].title
+    title: category.data[0].Title
   }
 }
 async function getCategory(filterKey: string, filterValue: string | number) {
@@ -21,13 +24,13 @@ async function getCategory(filterKey: string, filterValue: string | number) {
 
   return category
 }
+
 export default async function Page({ params }: { params: Promise<{ Slug: string }> }) {
 
   const category = await getCategory('Slug', (await params).Slug)
   if ((await params).slug) {
     return (<h1> {category.data[0].title}</h1>)
   } else {
-
     notFound()
   }
 }

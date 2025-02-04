@@ -1,10 +1,100 @@
 'use client'
 import Image from "next/image"
 import Head from 'next/head'
-import { useState } from "react";
-import Link from "next/link";
+import { useState } from "react"
+import Link from "next/link"
+import sample from "./carousel.sampleprops"
 
-export default function Carousel() {
+/// TODO map to camelCase
+export interface BasicPoint {
+  id: number,
+  Caption: null | string,
+  Additional: null | string,
+  Value: null,
+  Icon: null,
+  Description: null,
+  JS_Arguments: null
+}
+
+export type StrapiDynamicZone<ComponentType> = ComponentType[]
+
+export interface StrapiDynamicZoneChidren {
+  __component: string
+}
+
+type StrapiShortText = string 
+type StrapiLongText = string 
+
+interface StrapiImage extends StrapiDocument {
+  id:         number
+  name:       string 
+  alternativeText?: null | string
+  caption?:         null | string
+  formats: { [key: StrapiImageFormatKey]: StrapiImageFormat }
+  hash: string,
+  ext:  string,
+  meme: string,
+  size: number,
+  url:  string,
+  previewUrl?: null | string,
+  
+  //REVIEW Уточнить, узнать подробнее про эти поля
+  provider?:          null | string // "local"
+  provider_metadata?: null | any
+}
+
+interface StrapiDocument {
+  
+  documentId: string 
+  
+  createdAt:    string
+  updatedAt:    string
+  publishedAt:  string
+}
+
+type StrapiImageFormatKey = string // "thumbnail" | "small"
+interface StrapiImageFormat {
+
+}
+
+export interface StandartAlbum {
+  id:   number
+  Slug: StrapiShortText
+  Slides_As_Images: StrapiImage[]
+  Cover: BasicPoint
+}
+
+
+export interface StrapiEntry extends StrapiDocument{
+  id: number 
+  locale?: null | string
+}
+
+export interface PageSection extends StrapiEntry{
+  HTML_id:    string
+  Enabled:    boolean 
+  CMS_Name:   string
+  CMS_Description: string
+  
+  Heading: BasicPoint
+  Children: any[] //StrapiDynamicZone<StandartAlbum>
+}
+
+
+export interface CarouselProps {
+  data: PageSection[]
+  meta: {
+    pagination: any //REVIEW 
+  }
+}
+
+
+export const SampleCarousel = () => (
+  <Carousel { ...sample } />
+)
+
+export default function Carousel(props: CarouselProps) {
+  
   return (
     
     <div id="horizontal-thumbnails" data-carousel='{ "loadingClasses": "opacity-0" }' className=" h-[600px] relative w-full lg:xl:px-[5%]  xl:2xl:px-[10%] 2xl:max-[6000px]:px-[15%]">

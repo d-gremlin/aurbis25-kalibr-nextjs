@@ -19,23 +19,25 @@ export default async function Categories() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-
         <ul>
-          {/* <pre>{JSON.stringify(categories, null, '    ')}</pre> */}
-
-          {categories.data.map((category: any) => {
-            {
-              console.log(category.Slug)
-              if (category.Slug == category.category) {
-                return (<li key={category.Slug}><b><Link href={"/categories/subcategory/" + category.category + "/"}>{category.Slug}</Link></b></li>)
-              } else {
-                return (<li key={category.Slug}><Link href={"/categories/" + category.Slug}>{category.Slug}</Link></li>)
-              }
-
-            }
-          })}
+          {categories.data.map((category: any, index: number) => (
+            (category.Slug == category.Category) 
+            ? (
+              <li key={category.Slug || `category_${index}`}>
+                <b>
+                  <Link href={`/categories/subcategory/${ category.Category }/`}>{category.Title}</Link>
+                </b>
+              </li>
+            ) : (
+              <li key={category.Slug || `category_${index}`}>
+                <Link href={`/categories/${ category.Slug }`}>{ category.Title }</Link>
+              </li>
+            ) 
+          ))}
         </ul>
-       
+          <hr />
+          <pre>{JSON.stringify(categories, null, '    ')}</pre>
+
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
 

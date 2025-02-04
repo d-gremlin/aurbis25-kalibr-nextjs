@@ -9,7 +9,6 @@ async function getCategory(filterKey:string, filterValue:string|number) {
   return category
 }
 export default async function Page({params}: {params: Promise<{ slug: string }>}) {
-  
   const categories = await getCategory('category', (await params).slug)
   console.log((await params).slug)
   if((await params).slug){
@@ -22,10 +21,10 @@ export default async function Page({params}: {params: Promise<{ slug: string }>}
         {/* <pre>{JSON.stringify(categories, null, '    ')}</pre> */}
   
         {categories.data.map((category: any) => {{
-          if(category.slug == category.category){
-            return(<h1 className="text-2xl">{category.title}</h1>)
+          if(category.Slug == category.category){
+            return(<h1 className="text-2xl">{category.Title}</h1>)
           }else{
-            return(<li key={category.slug}><Link href={"/categories/"+category.slug}>{category.title}</Link></li>)
+            return(<li key={category.slug}><Link href={"/categories/"+category.Slug}>{category.Title}</Link></li>)
           }
           
           }})}
@@ -41,5 +40,4 @@ export default async function Page({params}: {params: Promise<{ slug: string }>}
   }else{
     notFound()
   }
-  
 }
