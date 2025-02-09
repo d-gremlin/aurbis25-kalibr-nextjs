@@ -20,14 +20,13 @@ export default async function ProductLines() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
 
         <ul>
-
-          { productLines.data ? 
-          productLines.data.map((productLine: any) => {
-            {
-              return (<li key={productLine.Slug}><Link href={"/product-lines/" + productLine.Slug}>{productLine.Slug}</Link></li>)
-    
-            }
-          }): null}
+        { productLines.data
+          ?.map((productLine: any) => (
+            <li key={productLine.Slug}>
+              <Link href={"/product-lines/" + productLine.Slug}>{productLine.Slug}</Link>
+            </li>
+          ))
+        }
         </ul>
        
       </main>

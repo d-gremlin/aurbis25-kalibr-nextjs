@@ -15,6 +15,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     title: portfolioWorks.data[0].title
   }
 }
+
 async function getPortfolio(filterKey: string, filterValue: string | number) {
   const res = await fetch(`http://localhost:1337/api/portfolio-works?filters[${filterKey}][$contains]=${filterValue}`, { cache: 'no-store' })
   const category = await res.json()
